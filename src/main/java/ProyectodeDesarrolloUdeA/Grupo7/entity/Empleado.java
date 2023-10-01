@@ -1,4 +1,4 @@
-package GestorFinanciero;
+package ProyectodeDesarrolloUdeA.Grupo7.entity;
 
 public class Empleado{
     //Atributos
@@ -6,14 +6,16 @@ public class Empleado{
     private String email;
     private String empresaEmpleado;
     private String role;
+    private long id;
 
     //Constructor
 
-    public Empleado(String nombreEmpleado, String email, String empresaEmpleado, String role) {
+    public Empleado() {
         this.nombreEmpleado = nombreEmpleado;
         this.email = email;
         this.empresaEmpleado = empresaEmpleado;
         this.role = role;
+        this.id = id;
     }
 
 
@@ -35,6 +37,9 @@ public class Empleado{
         return role;
     }
 
+    public long getId() {
+        return id;
+    }
 
     //Setters
 
@@ -52,5 +57,9 @@ public class Empleado{
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

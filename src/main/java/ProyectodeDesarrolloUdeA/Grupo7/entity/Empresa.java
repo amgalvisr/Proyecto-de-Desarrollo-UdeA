@@ -1,4 +1,4 @@
-package GestorFinanciero;
+package ProyectodeDesarrolloUdeA.Grupo7.entity;
 
 public class Empresa {
 
