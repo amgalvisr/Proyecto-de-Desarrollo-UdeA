@@ -1,23 +1,40 @@
-package ProyectodeDesarrolloUdeA.Grupo7.entity;
+package ProyectodeDesarrolloUdea.Grupo7.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "MovimientoDinero")
 public class MovimientoDinero {
-    private double montoDinero;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column
+    private Double montoDinero;
+    @Column
     private String tipoOperacion;
+    @Column
     private String conceptoDinero;
+    @Column
     private String responsableMovimiento;
 
     //Constructores
 
-    public MovimientoDinero(double montoDinero, String tipoOperacion, String conceptoDinero, String responsableMovimiento) {
-        this.montoDinero = montoDinero;
-        this.tipoOperacion = tipoOperacion;
-        this.conceptoDinero = conceptoDinero;
-        this.responsableMovimiento = responsableMovimiento;
-    }
+//    public MovimientoDinero(Double montoDinero, String tipoOperacion, String conceptoDinero, String responsableMovimiento) {
+//        this.montoDinero = montoDinero;
+//        this.tipoOperacion = tipoOperacion;
+//        this.conceptoDinero = conceptoDinero;
+//        this.responsableMovimiento = responsableMovimiento;
+//    }
 
     //Getters
 
-    public double getMontoDinero() {
+    public Long getId() {
+        return id;
+    }
+
+    public Double getMontoDinero() {
         return montoDinero;
     }
 
@@ -33,9 +50,15 @@ public class MovimientoDinero {
         return responsableMovimiento;
     }
 
+
     //Setters
 
-    public void setMontoDinero(double montoDinero) {
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setMontoDinero(Double montoDinero) {
         this.montoDinero = montoDinero;
     }
 

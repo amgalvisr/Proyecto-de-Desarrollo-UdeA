@@ -1,24 +1,40 @@
-package ProyectodeDesarrolloUdeA.Grupo7.entity;
+package ProyectodeDesarrolloUdea.Grupo7.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name= "Empresa")
 public class Empresa {
 
 
     //Atributos de la clase Empresa
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
     private String nombre;
+    @Column
     private String direccion;
+    @Column(unique = true, nullable = false)
     private String telefono;
+    @Column(unique = true, length = 10)
     private String nit;
 
     //Constructor de la clase Empresa
-    public Empresa(String nombre, String direccion, String telefono, String nit) {
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.nit = nit;
-    }
+//    public Empresa(String nombre, String direccion, String telefono, String nit) {
+//        this.nombre = nombre;
+//        this.direccion = direccion;
+//        this.telefono = telefono;
+//        this.nit = nit;
+//}
 
 
     //Getters de la clase Empresa
+
+    public Long getId() {
+        return id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -38,6 +54,11 @@ public class Empresa {
 
 
     //Setters de la clase Empresa
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

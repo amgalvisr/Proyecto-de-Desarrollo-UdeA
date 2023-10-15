@@ -1,0 +1,243 @@
+Index: src/main/java/ProyectodeDesarrolloUdea/Grupo7/repository/EmployeeRepository.java
+===================================================================
+diff --git a/src/main/java/ProyectodeDesarrolloUdea/Grupo7/repository/EmployeeRepository.java b/src/main/java/ProyectodeDesarrolloUdea/Grupo7/repository/EmployeeRepository.java
+deleted file mode 100644
+--- a/src/main/java/ProyectodeDesarrolloUdea/Grupo7/repository/EmployeeRepository.java	
++++ /dev/null	
+@@ -1,10 +0,0 @@
+-package ProyectodeDesarrolloUdea.Grupo7.repository;
+-
+-
+-import ProyectodeDesarrolloUdea.Grupo7.entity.Empleado;
+-import org.springframework.data.jpa.repository.JpaRepository;
+-import org.springframework.stereotype.Repository;
+-
+-@Repository
+-public interface EmployeeRepository extends JpaRepository<Empleado, Long> {
+-}
+Index: src/main/java/ProyectodeDesarrolloUdea/Grupo7/service/EmployeeService.java
+===================================================================
+diff --git a/src/main/java/ProyectodeDesarrolloUdea/Grupo7/service/EmployeeService.java b/src/main/java/ProyectodeDesarrolloUdea/Grupo7/service/EmployeeService.java
+deleted file mode 100644
+--- a/src/main/java/ProyectodeDesarrolloUdea/Grupo7/service/EmployeeService.java	
++++ /dev/null	
+@@ -1,33 +0,0 @@
+-package ProyectodeDesarrolloUdea.Grupo7.service;
+-
+-
+-import ProyectodeDesarrolloUdea.Grupo7.entity.Empleado;
+-import ProyectodeDesarrolloUdea.Grupo7.repository.EmployeeRepository;
+-import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.stereotype.Service;
+-
+-import java.util.List;
+-import java.util.Optional;
+-
+-@Service
+-public class EmployeeService {
+-    @Autowired
+-    EmployeeRepository employeeRepository;
+-
+-    public List<Empleado> getEmployees(){
+-        return employeeRepository.findAll();
+-    }
+-
+-    public Optional<Empleado> getEmployee(Long id){
+-        return employeeRepository.findById(id);
+-    }
+-
+-    public void saveOrUpdate(Empleado empleado){
+-        employeeRepository.save(empleado);
+-    }
+-
+-    public void delete(Long id){
+-        employeeRepository.deleteById(id);
+-    }
+-
+-}
+Index: src/main/java/ProyectodeDesarrolloUdea/Grupo7/controller/EmployeeController.java
+===================================================================
+diff --git a/src/main/java/ProyectodeDesarrolloUdea/Grupo7/controller/EmployeeController.java b/src/main/java/ProyectodeDesarrolloUdea/Grupo7/controller/EmployeeController.java
+deleted file mode 100644
+--- a/src/main/java/ProyectodeDesarrolloUdea/Grupo7/controller/EmployeeController.java	
++++ /dev/null	
+@@ -1,45 +0,0 @@
+-package ProyectodeDesarrolloUdea.Grupo7.controller;
+-
+-
+-import ProyectodeDesarrolloUdea.Grupo7.entity.Empleado;
+-import ProyectodeDesarrolloUdea.Grupo7.service.EmployeeService;
+-import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.web.bind.annotation.*;
+-
+-import java.util.List;
+-import java.util.Optional;
+-
+-@RestController
+-@RequestMapping(path="api/v1/employee")
+-public class EmployeeController {
+-
+-
+-    @Autowired
+-    private EmployeeService employeeService;
+-
+-    /*
+-    public EmployeeController(EmployeeService employeeService) {
+-        this.employeeService = employeeService;
+-    }
+-     */
+-
+-    @GetMapping
+-    public List<Empleado> getAll(){
+-        return employeeService.getEmployees();
+-    }
+-
+-    @GetMapping("/{id}")
+-    public Optional<Empleado> getById(@PathVariable("id") Long id){
+-        return employeeService.getEmployee(id);
+-    }
+-
+-    @PostMapping
+-    public void saveUpdate(@RequestBody Empleado empleado){
+-        employeeService.saveOrUpdate(empleado);
+-    }
+-
+-    @DeleteMapping("/{id}")
+-    public void saveUpdate(@PathVariable("id") Long id){
+-        employeeService.delete(id);
+-    }
+-}
+Index: .idea/jarRepositories.xml
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+deleted file mode 100644
+--- a/.idea/jarRepositories.xml	
++++ /dev/null	
+@@ -1,20 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RemoteRepositoriesConfiguration">
+-    <remote-repository>
+-      <option name="id" value="central" />
+-      <option name="name" value="Central Repository" />
+-      <option name="url" value="https://repo.maven.apache.org/maven2" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="central" />
+-      <option name="name" value="Maven Central repository" />
+-      <option name="url" value="https://repo1.maven.org/maven2" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="jboss.community" />
+-      <option name="name" value="JBoss Community repository" />
+-      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+-    </remote-repository>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+deleted file mode 100644
+--- a/.idea/compiler.xml	
++++ /dev/null	
+@@ -1,18 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="CompilerConfiguration">
+-    <annotationProcessing>
+-      <profile name="Maven default annotation processors profile" enabled="true">
+-        <sourceOutputDir name="target/generated-sources/annotations" />
+-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+-        <outputRelativeToContentRoot value="true" />
+-        <module name="Grupo7" />
+-      </profile>
+-    </annotationProcessing>
+-  </component>
+-  <component name="JavacSettings">
+-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+-      <module name="Grupo7" options="-parameters" />
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: HELP.md
+===================================================================
+diff --git a/HELP.md b/HELP.md
+deleted file mode 100644
+--- a/HELP.md	
++++ /dev/null	
+@@ -1,20 +0,0 @@
+-# Getting Started
+-
+-### Reference Documentation
+-For further reference, please consider the following sections:
+-
+-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
+-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/3.1.4/maven-plugin/reference/html/)
+-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/3.1.4/maven-plugin/reference/html/#build-image)
+-* [Spring Web](https://docs.spring.io/spring-boot/docs/3.1.4/reference/htmlsingle/index.html#web)
+-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/3.1.4/reference/htmlsingle/index.html#data.sql.jpa-and-spring-data)
+-
+-### Guides
+-The following guides illustrate how to use some features concretely:
+-
+-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
+-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
+-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
+-* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
+-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+-
+diff --git a/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/entity/Empresa.java b/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/entity/Empresa.java
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/entity/Empleado.java b/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/entity/Empleado.java
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/entity/MovimientoDinero.java b/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/entity/MovimientoDinero.java
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/controllers/UsersControllers.java b/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/controllers/UsersControllers.java
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/controllers/EnterpriseControllers.java b/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/controllers/EnterpriseControllers.java
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/controllers/TransactionControllers.java b/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/controllers/TransactionControllers.java
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/Grupo7Application.java b/Proyecto-de-Desarrollo-UdeA/src/main/java/ProyectodeDesarrolloUdeA/Grupo7/Grupo7Application.java
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/src/main/resources/application.properties b/Proyecto-de-Desarrollo-UdeA/src/main/resources/application.properties
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/src/test/java/ProyectodeDesarrolloUdeA/Grupo7/Grupo7ApplicationTests.java b/Proyecto-de-Desarrollo-UdeA/src/test/java/ProyectodeDesarrolloUdeA/Grupo7/Grupo7ApplicationTests.java
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/.mvn/wrapper/maven-wrapper.properties b/Proyecto-de-Desarrollo-UdeA/.mvn/wrapper/maven-wrapper.properties
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/.idea/misc.xml b/Proyecto-de-Desarrollo-UdeA/.idea/misc.xml
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/.idea/.gitignore b/Proyecto-de-Desarrollo-UdeA/.idea/.gitignore
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/.idea/encodings.xml b/Proyecto-de-Desarrollo-UdeA/.idea/encodings.xml
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/.idea/uiDesigner.xml b/Proyecto-de-Desarrollo-UdeA/.idea/uiDesigner.xml
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/pom.xml b/Proyecto-de-Desarrollo-UdeA/pom.xml
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/.gitignore b/Proyecto-de-Desarrollo-UdeA/.gitignore
+deleted file mode 100644
+diff --git a/Proyecto-de-Desarrollo-UdeA/.mvn/wrapper/maven-wrapper.jar b/Proyecto-de-Desarrollo-UdeA/.mvn/wrapper/maven-wrapper.jar
+deleted file mode 100644
+index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+Hc$@<O00001
+
+diff --git a/Proyecto-de-Desarrollo-UdeA/mvnw b/Proyecto-de-Desarrollo-UdeA/mvnw
+deleted file mode 100644
+index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+Hc$@<O00001
+
+diff --git a/Proyecto-de-Desarrollo-UdeA/mvnw.cmd b/Proyecto-de-Desarrollo-UdeA/mvnw.cmd
+deleted file mode 100644
+index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+Hc$@<O00001
+
